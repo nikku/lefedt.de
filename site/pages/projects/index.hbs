@@ -1,0 +1,106 @@
+---
+title: Projects
+description: 'Some of the stuff I do'
+---
+
+<p>
+  These are some of the projects I have worked on:
+</p>
+
+
+<h2>NodeJS utilities</h2>
+
+<ul>
+{{#compose src='*.md' cwd='site/pages/projects/nodejs'}}
+<li>
+  {{{ @content }}}
+  <p>
+    technologies: {{technologies}}, status: {{ status }}
+  </p>
+</li>
+{{/compose}}
+</ul>
+
+
+<h2>websites (active)</h2>
+
+<ul>
+{{#compose src='*.md' cwd='site/pages/projects/websites/active'}}
+<li>
+  {{{ @content }}}
+  <p>
+    technologies: {{technologies}}, status: {{ status }}
+  </p>
+</li>
+{{/compose}}
+</ul>
+
+
+<h2>AngularJS tools</h2>
+
+<ul>
+{{#compose src='*.md' cwd='site/pages/projects/angularjs'}}
+<li>
+  {{{ @content }}}
+  <p>
+    technologies: {{technologies}}, status: {{ status }}
+  </p>
+</li>
+{{/compose}}
+</ul>
+
+
+<h2>jQuery plug-ins</h2>
+
+<ul>
+{{#compose src='*.md' cwd='site/pages/projects/jquery'}}
+<li>
+  {{{ @content }}}
+  <p>
+    technologies: {{technologies}}, status: {{ status }}
+  </p>
+</li>
+{{/compose}}
+</ul>
+
+
+<h2>Ruby tools</h2>
+
+<ul>
+{{#compose src='*.md' cwd='site/pages/projects/ruby'}}
+<li>
+  {{{ @content }}}
+  <p>
+    technologies: {{technologies}}, status: {{ status }}
+  </p>
+</li>
+{{/compose}}
+</ul>
+
+
+<h2>websites (inactive)</h2>
+
+<ul>
+{{#compose src='*.md' cwd='site/pages/projects/websites/inactive'}}
+<li>
+  {{{ @content }}}
+  <p>
+    technologies: {{technologies}}, status: {{ status }}
+  </p>
+</li>
+{{/compose}}
+</ul>
+
+
+<h2>Game automation</h2>
+
+<ul>
+{{#compose src='*.md' cwd='site/pages/projects/game-automation'}}
+<li>
+  {{{ @content }}}
+  <p>
+    technologies: {{technologies}}, status: {{ status }}
+  </p>
+</li>
+{{/compose}}
+</ul>
