@@ -1,9 +1,12 @@
 {
-  "name": "tech.lefedt.de",
+  "name": "lefedt.de",
   "version": "0.0.0",
   "authors": [
     "Nico Rehwaldt <git_nikku@nixis.de>"
   ],
   "license": "MIT",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.1.1"
+  }
 }
