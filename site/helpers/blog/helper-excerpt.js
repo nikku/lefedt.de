@@ -2,7 +2,7 @@ module.exports.register = function(Handlebars, options, params)  {
 
   var CONTINUE = '<!-- continue -->';
 
-  Handlebars.registerHelper('exerpt', function(url, options) {
+  Handlebars.registerHelper('excerpt', function(url, options) {
     var result = options.fn(this);
 
     var splitIdx = result.indexOf(CONTINUE);

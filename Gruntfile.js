@@ -5,7 +5,6 @@ module.exports = function (grunt) {
   require('time-grunt')(grunt);
   require('load-grunt-tasks')(grunt);
 
-
   grunt.initConfig({
 
     pkg: grunt.file.readJSON('package.json'),
@@ -26,7 +25,7 @@ module.exports = function (grunt) {
           paths: [ '<%= config.assets %>/less', '<%= config.libs.bootstrap %>/less' ]
         },
         files: {
-          '<%= config.dist %>/assets/lefedt.css': '<%= config.assets %>/less/lefedt.less'
+          '<%= config.dist %>/assets/css/lefedt.css': '<%= config.assets %>/less/lefedt.less'
         }
       }
     },
@@ -42,7 +41,7 @@ module.exports = function (grunt) {
           },
           {
             cwd: '<%= config.assets %>',
-            src: [ 'img/**/*.*', 'font/lefedt.*' ],
+            src: [ 'css/**/*.*', 'img/**/*.*', 'font/lefedt.*' ],
             dest: '<%= config.dist %>/assets',
             expand: true
           }
@@ -62,6 +61,7 @@ module.exports = function (grunt) {
       copy: {
         files: [
           '<%= config.assets %>/img/**/*',
+          '<%= config.assets %>/css/**/*',
           '<%= config.assets %>/font/lefedt.*',
           '<%= config.site %>/index.html'
         ],
@@ -80,8 +80,8 @@ module.exports = function (grunt) {
 
     connect: {
       options: {
-        port: 9000,
-        livereload: 35729,
+        port: 9005,
+        livereload: 19005,
         hostname: 'localhost'
       },
       livereload: {
@@ -99,19 +99,7 @@ module.exports = function (grunt) {
         app: '<%= config %>',
         flatten: true,
         marked: {
-          process: true,
-          highlight: function(code, lang, callback) {
-            var hjs = require('highlight.js');
-
-            var result;
-            if (lang) {
-              result = hjs.highlight(lang, code);
-            } else {
-              result = hjs.highlightAuto(code);
-            }
-
-            callback(null, result.value);
-          }
+          process: true
         },
         assets: '<%= config.dist %>/assets',
         layoutdir: '<%= config.site %>/layouts',
@@ -122,7 +110,6 @@ module.exports = function (grunt) {
           'assemble-contrib-permalinks'
         ],
         helpers: [
-          'handlebars-helper-compose',
           '<%= config.site %>/helpers/**/*.js'
         ]
       },
@@ -137,7 +124,20 @@ module.exports = function (grunt) {
       blog: {
         options: {
           marked: {
-            process: true
+            process: true,
+            langPrefix: 'hljs language-',
+            highlight: function(code, lang) {
+              var hjs = require('highlight.js');
+
+              var result;
+              if (lang) {
+                result = hjs.highlight(lang, code);
+              } else {
+                result = hjs.highlightAuto(code);
+              }
+
+              return result.value;
+            }
           },
           helpers: [
             'handlebars-helper-compose',

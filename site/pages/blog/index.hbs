@@ -7,18 +7,18 @@ layout: 'blog.hbs'
 
 {{#compose src='*/*.md' cwd='site/pages/blog' sortBy="published" sortOrder="desc"}}
 
-<div class="lft-blogpost">
+<div class="lft-blogpost-preview">
 
   <div class="published">
     {{ moment @published format="dddd, MMMM DD, YYYY" }}
   </div>
 
-  <h1 class="page-header"><a href="posts/{{@slug}}.html">{{ @title }}</a></h1>
+  <h2 class="page-header"><a href="posts/{{@slug}}.html">{{ @title }}</a></h2>
 
   <div class="content">
-    {{#exerpt @slug}}
+    {{#excerpt @slug}}
       {{{@content}}}
-    {{/exerpt}}
+    {{/excerpt}}
   </div>
 
   <div class="meta">
