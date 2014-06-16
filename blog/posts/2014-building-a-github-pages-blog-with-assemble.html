@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="author" content="Nico Rehwaldt">
+
+    <title>A developer friendly blog setup with Assemble + GitHub pages - lefedt.de</title>
+
+    <link rel="stylesheet" href="../../assets/css/highlight.css">
+
+    <link rel="stylesheet" href="../../assets/css/lefedt.css">
+    <link rel="icon" href="../../assets/favicon.ico">
+  </head>
+  <body>
+
+    
+
+
+<header class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".lft-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand" href="../..">on paper</a>
+    </div>
+
+    <ul class="nav navbar-nav navbar-right lft-navbar-collapse">
+      <li><a href="../../projects">Projects</a></li>
+      <li><a href="../../blog">Blog</a></li>
+      <li><a href="../../about">About</a></li>
+    </ul>
+  </div>
+</header>
+
+    <div class="lft-content">
+      
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+
+      
+
+<div class="lft-header">
+  <!--
+  <div class="h1">Blog</div>
+  -->
+
+  <p class="h4">
+    random thoughts
+  </p>
+</div>
+
+      
+
+<div class="lft-blogpost single">
+
+  <div class="published">
+    Monday, June 16, 2014
+  </div>
+
+  <h1 class="page-header"><a href="./2014-building-a-github-pages-blog-with-assemble.html">A developer friendly blog setup with Assemble + GitHub pages</a></h1>
+
+  <div class="content">
+    <p class="intro">
+  This post shows you how to create a simple, 100% developer friendy blogging setup.
+  It allows you to write your posts with markdown, build the blog with <a href="http://assemble.io">Assemble</a> and publish it to <a href="https://pages.github.com/">GitHub pages</a>.
+  Get rid of WYSIWYG editors and reclaim your blog!
+</p>
+
+<!-- continue -->
+
+<p><em>TLDR; Checkout <a href="https://github.com/Nikku/lefedt.de">the sources of this webpage</a> for the finished solution.</em></p>
+<p>I am a programmer and blogger but I have not been blogging for a while.
+This is not because there is nothing to write, in fact I am working on many exciting topics that deserve it to be mentioned.
+I just hate my old blogging solution.</p>
+<h2 id="workflow-issues">Workflow issues</h2>
+<p>My old solution is a web application I wrote in Ruby on Rails and dates back to 2009.
+It allows me to write blog posts online and supports live preview, markdown markup and the ability to pretty print code.
+It sucks not because of the way it is built but rather because it forces me to write blog posts in a browser-centric <a href="http://blogger.com">blogger</a>-like way:</p>
+<ul>
+<li><p>It <em>does not integrate</em> with my development setup.
+Because of that I cannot use my favourite text editor to write posts, something that is especially important when you blog code snippets.
+Additionally I cannot easily get a live preview of the new post.</p>
+</li>
+<li><p>It is an <em>online</em> solution that forces me to write a post in the browser and auto save them rather than dumping them to disk.
+How many times did I loose a post by accidently refreshing or closing the browser window?
+Attaching arbitrary files is a pain, too.</p>
+</li>
+<li><p>It is a <em>web application</em> I need to keep up and running.
+The mere fact that I need a login to write blog posts poses a security thread for me.</p>
+</li>
+</ul>
+<h2 id="make-it-better">Make it better</h2>
+<p>Let&#39;s improve the blogging experience and with a simpler, developer friendly setup.
+Its main ingredients are:</p>
+<ul>
+<li><p><em>Write</em> blog posts in markdown, HTML or any other markup and attach arbitrary files.</p>
+</li>
+<li><p><em>Build</em> the blog with <a href="http://assemble.io">Assemble</a>, a static site generator.</p>
+</li>
+<li><p><em>Publish</em> the blog to <a href="https://pages.github.com/">GitHub pages</a></p>
+</li>
+</ul>
+<h2 id="basic-blog-structure">Basic blog structure</h2>
+<p>The following directory tree shows our basic blog structure.
+The important folders are <code>pages</code> and <code>layouts</code>.
+<code>pages</code> hold the actual content of our blog, including all blog entries (structured in arbitrary order) and a blog overview page <code>index.hbs</code>.
+The files in the <code>layouts</code> directory define the overall structur of our blog.</p>
+<pre><code class="hljs language-bash">blog
+├──data
+├──dist
+├──helpers
+│  └──blog
+├──layouts
+│  ├──base.hbs
+│  └──blogpost.hbs
+├──pages
+│  ├──about
+│  ├──blog
+│  │  ├──<span class="hljs-number">2013</span>
+│  │  │  ├──<span class="hljs-number">001</span>-first-blog-post.md
+│  │  │  └──<span class="hljs-number">002</span>-another-blog-post.md
+│  │  ├──<span class="hljs-number">2014</span>
+│  │  │  └──<span class="hljs-number">001</span>-new-year-yai.md
+│  │  └──index.hbs
+│  └──...
+└──partials</code></pre>
+<p>The <code>dist</code> folder is the location or blog will later be compiled to.</p>
+<h2 id="a-single-post">A single post</h2>
+<p>All files in subdirectories of <code>pages/blog</code> represent blog entries. Each blog entry contains meta data enclosed in
+<code>---</code> as well as the actual blog contents.</p>
+<pre><code class="hljs language-markdown"><span class="hljs-horizontal_rule">---</span>
+title: First Blog Post
+slug: 2013-first-blog-post
+
+author: Nico<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">link-to-me</span>&gt;</span></span>
+published: 2014-05-01 12:07
+
+<span class="hljs-header">layout: blogpost.hbs
+---</span>
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"intro"</span>&gt;</span></span>
+  This is a catchy intro for my blog post. Isn't it?
+<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span></span>
+
+<span class="xml"><span class="hljs-comment">&lt;!-- continue --&gt;</span></span>
+
+This will be hidden in the blog overview but shown
+for the complete blog post.</code></pre>
+<p>Edit that file happily using your favourite text editor.</p>
+<h3 id="post-meta-data">Post meta data</h3>
+<p>A post defines some meta data that is important for our blogging setup.
+Let us have a closer look on the relevant fields:</p>
+<ul>
+<li><p><code>title</code> (self explanatory), will be inserted for the post.
+There is no need for an additional main heading in the post content.</p>
+</li>
+<li><p><code>published</code> decides on the order of blog posts</p>
+</li>
+<li><p><code>slug</code> is the permanent location of the blog post and should thus be unique across all posts.
+Each entry will later be available via <code>http://myblog/blog/posts/:slug.html</code>.</p>
+</li>
+<li><p><code>layout</code> defines the structure of the post</p>
+</li>
+<li><p><code>author</code> will be used to link to the writer of the post as <code>:name&lt;:link&gt;</code>.
+The link can be an arbitray location but should reflect the author.</p>
+</li>
+</ul>
+<h3 id="intro-and-continue-reading">Intro and continue reading</h3>
+<p>Our infrastructure will support highlighting for post introductions.
+Wrap it into a <code>&lt;p class=&quot;intro&quot;&gt;&lt;/p&gt;</code> block for an additional styling in the full post view.</p>
+<p>Insert a <code>&lt;!-- continue --&gt;</code> marker to denote the end of the post parts that are rendered in the blog post overview.
+Everything below that fold will only be shown in the full post view and signalized through a <em>continue reading...</em> link.</p>
+<p>Let us now have a look on the actual blog infrastructure.</p>
+<h2 id="infrastructure">Infrastructure</h2>
+<p>We will use <a href="http://assemble.io">Assemble</a>, a static site generator, to build our blog from the posts we wrote.
+Assemble is a plug-in for <a href="http://gruntjs.com">grunt</a> and thus integrates well in a web developers tool chain.
+Grunt is a popular build tool for client-side applications and runs on top of <a href="http://nodejs.org">NodeJS</a>.</p>
+<h3 id="environment-setup">Environment setup</h3>
+<p>Install <a href="http://nodejs.org">NodeJS</a>.
+Follow up by installing the command line tool for Grunt via <a href="http://npmjs.org">npm</a>, the NodeJS package manager:</p>
+<pre><code class="hljs language-bash">npm install -g grunt-cli</code></pre>
+<h3 id="the-project-descriptor">The project descriptor</h3>
+<p>Create a <code>package.json</code> in the root folder of the blog.
+It defines all the neccessary dependencies of our blogging infrastructure.</p>
+<pre><code class="hljs language-json">{
+  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"myblog"</span></span>,
+  "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-string">"0.0.0"</span></span>,
+  "<span class="hljs-attribute">private</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+  "<span class="hljs-attribute">devDependencies</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">assemble</span>": <span class="hljs-value"><span class="hljs-string">"^0.4.39"</span></span>,
+    "<span class="hljs-attribute">assemble-contrib-anchors</span>": <span class="hljs-value"><span class="hljs-string">"^0.1.1"</span></span>,
+    "<span class="hljs-attribute">assemble-contrib-permalinks</span>": <span class="hljs-value"><span class="hljs-string">"^0.3.4"</span></span>,
+    "<span class="hljs-attribute">grunt</span>": <span class="hljs-value"><span class="hljs-string">"^0.4.5"</span></span>,
+    "<span class="hljs-attribute">grunt-contrib-clean</span>": <span class="hljs-value"><span class="hljs-string">"~0.5.0"</span></span>,
+    "<span class="hljs-attribute">grunt-contrib-connect</span>": <span class="hljs-value"><span class="hljs-string">"~0.6.0"</span></span>,
+    "<span class="hljs-attribute">grunt-contrib-copy</span>": <span class="hljs-value"><span class="hljs-string">"~0.5.0"</span></span>,
+    "<span class="hljs-attribute">grunt-contrib-less</span>": <span class="hljs-value"><span class="hljs-string">"~0.9.0"</span></span>,
+    "<span class="hljs-attribute">grunt-contrib-watch</span>": <span class="hljs-value"><span class="hljs-string">"~0.5.3"</span></span>,
+    "<span class="hljs-attribute">handlebars-helper-compose</span>": <span class="hljs-value"><span class="hljs-string">"^0.2.12"</span></span>,
+    "<span class="hljs-attribute">handlebars-helper-moment</span>": <span class="hljs-value"><span class="hljs-string">"^0.1.3"</span></span>,
+    "<span class="hljs-attribute">load-grunt-tasks</span>": <span class="hljs-value"><span class="hljs-string">"~0.2.1"</span>
+  </span>}</span>,
+  "<span class="hljs-attribute">dependencies</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">highlight.js</span>": <span class="hljs-value"><span class="hljs-string">"^8.0.0"</span>
+  </span>}
+</span>}</code></pre>
+<p>To install the dependencies, execute</p>
+<pre><code class="hljs language-bash">npm install</code></pre>
+<p>in the blog directory. It downloads all dependencies to the <code>node_modules</code> folder.</p>
+<h3 id="the-build-file">The build file</h3>
+<p>Go ahead and create build script called <code>Gruntfile.js</code> in the project root.
+It should have the following contents:</p>
+<pre><code class="hljs language-javascript">module.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(grunt)</span> {</span>
+
+  <span class="hljs-built_in">require</span>(<span class="hljs-string">'load-grunt-tasks'</span>)(grunt);
+
+  grunt.initConfig({
+
+    watch: {
+      assemble: {
+        files: [ <span class="hljs-string">'site/**/*.{md,hbs,yml}'</span> ],
+        tasks: [ <span class="hljs-string">'assemble'</span> ]
+      }
+    },
+
+    assemble: {
+      options: {
+        flatten: <span class="hljs-literal">true</span>,
+        marked: {
+          process: <span class="hljs-literal">true</span>
+        },
+        assets: <span class="hljs-string">'dist/assets'</span>,
+        layoutdir: <span class="hljs-string">'site/layouts'</span>,
+        layout: <span class="hljs-string">'default.hbs'</span>,
+        data: <span class="hljs-string">'site/data/*.{json,yml}'</span>,
+        partials: <span class="hljs-string">'site/partials/*.hbs'</span>,
+        plugins: [
+          <span class="hljs-string">'assemble-contrib-permalinks'</span>
+        ],
+        helpers: [
+          <span class="hljs-string">'site/helpers/**/*.js'</span>
+        ]
+      },
+      blog: {
+        options: {
+          marked: {
+            process: <span class="hljs-literal">true</span>
+          },
+          helpers: [
+            <span class="hljs-string">'handlebars-helper-compose'</span>,
+            <span class="hljs-string">'handlebars-helper-moment'</span>
+          ],
+          permalinks: {
+            structure: <span class="hljs-string">':slug.html'</span>
+          }
+        },
+        files: {
+          <span class="hljs-string">'dist/blog/posts/'</span>: [
+            <span class="hljs-string">'site/pages/blog/*/*.{md,hbs}'</span>
+          ]
+        }
+      }
+    },
+
+    clean: [ <span class="hljs-string">'dist/**/*'</span> ]
+  });
+
+  <span class="hljs-comment">// assemble incompatible with load-grunt-tasks</span>
+  grunt.loadNpmTasks(<span class="hljs-string">'assemble'</span>);
+
+  grunt.registerTask(<span class="hljs-string">'build'</span>, [
+    <span class="hljs-string">'clean'</span>,
+    <span class="hljs-string">'assemble'</span>
+  ]);
+
+  grunt.registerTask(<span class="hljs-string">'default'</span>, [ <span class="hljs-string">'build'</span> ]);
+};</code></pre>
+<p>In the build file, we configure assemble and define it as our main build task.</p>
+<h3 id="blog-layout">Blog layout</h3>
+<p>Before we can actually assemble the blog, we need to define the layouts used by our blog posts.</p>
+<p>Put a file with the following contents as <code>blogpost.hbs</code> into our <code>layouts</code> directory.</p>
+<pre><code class="hljs language-handlebars"><span class="xml">---
+layout: blog.hbs
+---
+
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"blogpost single"</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"published"</span>&gt;</span>
+    </span><span class="hljs-expression">{{ <span class="hljs-variable">moment</span> <span class="hljs-variable">published</span> <span class="hljs-variable">format</span>=<span class="hljs-string">"dddd, MMMM DD, YYYY"</span> }}</span><span class="xml">
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-title">h1</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"page-header"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"./</span></span></span><span class="hljs-expression">{{<span class="hljs-variable">slug</span>}}</span><span class="xml"><span class="hljs-tag"><span class="hljs-value">.html"</span>&gt;</span></span><span class="hljs-expression">{{ <span class="hljs-variable">title</span> }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"content"</span>&gt;</span>
+    </span><span class="hljs-expression">{{<span class="hljs-begin-block">#markdown </span>}}</span><span class="xml">
+      </span><span class="hljs-expression">{{&gt; <span class="hljs-variable">body</span>}}</span><span class="xml">
+    </span><span class="hljs-expression">{{<span class="hljs-end-block">/markdown</span>}}</span><span class="xml">
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"meta"</span>&gt;</span>
+    Posted by </span><span class="hljs-expression">{{ <span class="hljs-variable">author</span> <span class="hljs-variable">author</span> }}</span><span class="xml"> on <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"</span></span></span><span class="hljs-expression">{{<span class="hljs-variable">slug</span>}}</span><span class="xml"><span class="hljs-tag"><span class="hljs-value">.html"</span>&gt;</span></span><span class="hljs-expression">{{ <span class="hljs-variable">moment</span> <span class="hljs-variable">published</span> <span class="hljs-variable">format</span>=<span class="hljs-string">"YYYY-MM-DD HH:mm ZZ"</span> }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>.
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></span></code></pre>
+<p>The file scaffolds each post with the published date (formated via the <a href="https://github.com/helpers/handlebars-helper-moment">moment helper for handlebars</a>), post title as well as additional meta data.</p>
+<p>You should wrap the template in additional <code>blog.hbs</code> skeletons that defines the general structure of the blog.</p>
+<pre><code class="hljs language-handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
+</span><span class="hljs-expression">{{&gt;<span class="hljs-variable">body</span>}}</span><span class="xml">
+<span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span></span></code></pre>
+<p>You may add styles as well as additional markup for header, footer and navigation to this bare template.
+I prefer <a href="http://getbootstrap.com">Bootstrap</a> for the general page scaffholding but really, the choice is yours.</p>
+<p>Just ensure you keep the <code>{{&gt;body}}</code> placeholder to include child layouts or page data.</p>
+<h3 id="the-author-blog-helper">The author blog helper</h3>
+<p>To be able to compile the <code>blogpost.hbs</code> template, we need the <code>author</code> blog helper.</p>
+<p>Add it as <code>helper-author.js</code> to the <code>helpers</code> directory.
+It will split our <code>:name&lt;:link&gt;</code> author meta data field and render a proper link for it in the markup.</p>
+<pre><code class="hljs language-javascript">module.exports.register = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(Handlebars, options, params)</span>  {</span>
+
+  <span class="hljs-keyword">var</span> PATTERN = <span class="hljs-regexp">/^(.+)\s*&lt;(.+)&gt;$/</span>;
+
+  Handlebars.registerHelper(<span class="hljs-string">'author'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(author, options)</span> {</span>
+    <span class="hljs-keyword">var</span> result;
+
+    <span class="hljs-keyword">var</span> match = PATTERN.exec(author);
+    <span class="hljs-keyword">if</span> (match) {
+      result = <span class="hljs-string">'&lt;a class="author" href="'</span> + match[<span class="hljs-number">2</span>] + <span class="hljs-string">'"&gt;'</span> + match[<span class="hljs-number">1</span>] + <span class="hljs-string">'&lt;/a&gt;'</span>;
+    } <span class="hljs-keyword">else</span> {
+      result = <span class="hljs-string">'&lt;span class="author"&gt;'</span> + author + <span class="hljs-string">'&lt;/a&gt;'</span>;
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Handlebars.SafeString(result);
+  });
+};</code></pre>
+<h3 id="generate-all-things">Generate all things</h3>
+<p>With layouts and the necessary helpers in place we can now generate our blog by executing</p>
+<pre><code class="hljs language-bash">grunt</code></pre>
+<p>on the command line. It will output the generated pages to the <code>dist</code> directory.</p>
+<h3 id="a-blog-overview-page">A blog overview page</h3>
+<p>To add a blog overview page, create a file <code>blog/index.hbs</code> with the following contents:</p>
+<pre><code class="hljs language-handlebars"><span class="xml">---
+title: Blog
+layout: 'blog.hbs'
+---
+
+
+</span><span class="hljs-expression">{{<span class="hljs-begin-block">#compose src</span>='*/*<span class="hljs-variable">.md</span>' <span class="hljs-variable">cwd</span>='<span class="hljs-variable">site</span><span class="hljs-end-block">/pages</span><span class="hljs-end-block">/blog</span>' <span class="hljs-variable">sortBy</span>=<span class="hljs-string">"published"</span> <span class="hljs-variable">sortOrder</span>=<span class="hljs-string">"desc"</span>}}</span><span class="xml">
+
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"blogpost-preview"</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"published"</span>&gt;</span>
+    </span><span class="hljs-expression">{{ <span class="hljs-variable">moment</span> @<span class="hljs-variable">published</span> <span class="hljs-variable">format</span>=<span class="hljs-string">"dddd, MMMM DD, YYYY"</span> }}</span><span class="xml">
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-title">h2</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"page-header"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"posts/</span></span></span><span class="hljs-expression">{{@<span class="hljs-variable">slug</span>}}</span><span class="xml"><span class="hljs-tag"><span class="hljs-value">.html"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"content"</span>&gt;</span>
+    </span><span class="hljs-expression">{{<span class="hljs-begin-block">#excerpt </span>@<span class="hljs-variable">slug</span>}}</span><span class="xml">
+      </span><span class="hljs-expression">{{{@<span class="hljs-variable">content</span>}}</span><span class="xml">}
+    </span><span class="hljs-expression">{{<span class="hljs-end-block">/excerpt</span>}}</span><span class="xml">
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"meta"</span>&gt;</span>
+    Posted by </span><span class="hljs-expression">{{ <span class="hljs-variable">author</span> @<span class="hljs-variable">author</span> }}</span><span class="xml"> on <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"posts/</span></span></span><span class="hljs-expression">{{@<span class="hljs-variable">slug</span>}}</span><span class="xml"><span class="hljs-tag"><span class="hljs-value">.html"</span>&gt;</span></span><span class="hljs-expression">{{ <span class="hljs-variable">moment</span> @<span class="hljs-variable">published</span> <span class="hljs-variable">format</span>=<span class="hljs-string">"DD MMMM YYYY HH:mm ZZ"</span> }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>.
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+</span><span class="hljs-expression">{{<span class="hljs-end-block">/compose</span>}}</span><span class="xml"></span></code></pre>
+<p>It uses the <a href="https://github.com/helpers/handlebars-helper-compose">compose helper</a> for handlebars to grep through all
+blog posts, order them and generate a post preview.</p>
+<p>Define the <code>excerpt</code> helper in a file <code>helpers/helper-excerpt.js</code>.
+It scans a post for the <code>&lt;!-- continue --&gt;</code> fold and extracts the preview accordingly.</p>
+<pre><code class="hljs language-javascript">module.exports.register = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(Handlebars, options, params)</span>  {</span>
+
+  <span class="hljs-keyword">var</span> CONTINUE = <span class="hljs-string">'&lt;!-- continue --&gt;'</span>;
+
+  Handlebars.registerHelper(<span class="hljs-string">'excerpt'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(url, options)</span> {</span>
+    <span class="hljs-keyword">var</span> result = options.fn(<span class="hljs-keyword">this</span>);
+
+    <span class="hljs-keyword">var</span> splitIdx = result.indexOf(CONTINUE);
+    <span class="hljs-keyword">if</span> (splitIdx !== -<span class="hljs-number">1</span>) {
+      result = result.substring(<span class="hljs-number">0</span>, splitIdx);
+
+      result += <span class="hljs-string">'&lt;p&gt;&lt;a href="posts/'</span> + url + <span class="hljs-string">'.html"&gt;Continue reading ...&lt;/a&gt;&lt;/p&gt;'</span>;
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Handlebars.SafeString(result);
+  });
+};</code></pre>
+<p>Now modify the Assemble configuration in our <code>Gruntfile.js</code> to include the blog index page.</p>
+<pre><code class="hljs language-javascript">module.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(grunt)</span> {</span>
+    ...
+
+    assemble: {
+      ...
+      blog: {
+        ...
+
+        files: {
+          <span class="hljs-string">'dist/blog/posts/'</span>: [
+            <span class="hljs-string">'site/pages/blog/*/*.{md,hbs}'</span>
+          ],
+          <span class="hljs-string">'dist/blog/'</span>: [
+            <span class="hljs-string">'site/pages/blog/*.hbs'</span>
+          ]
+        }
+      }
+    },
+
+    ...
+};</code></pre>
+<p>With these changes in place we have our blog setup ready. But wait, isn&#39;t there more?</p>
+<h2 id="additional-topics">Additional topics</h2>
+<p>This section discusses a few additional things that are still missing in our setup.
+These are preview and live reload as well as how to add attachments.</p>
+<h3 id="preview-and-live-reload">Preview and live reload</h3>
+<p>A much needed feature is live preview. Let us add it through standard Grunt features by configuring the <a href="https://github.com/gruntjs/grunt-contrib-watch">watch</a> and <a href="https://github.com/gruntjs/grunt-contrib-connect">connect</a> tasks in our build file.</p>
+<pre><code class="hljs language-javascript">module.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(grunt)</span> {</span>
+  ...
+
+  grunt.initConfig({
+
+    watch: {
+      assemble: {
+        files: [ <span class="hljs-string">'site/**/*.{md,hbs,yml}'</span> ],
+        tasks: [ <span class="hljs-string">'assemble'</span> ]
+      },
+      livereload: {
+        options: {
+          livereload: <span class="hljs-string">'&lt;%= connect.options.livereload %&gt;'</span>
+        },
+        files: [
+          <span class="hljs-string">'dist/**/*.*'</span>
+        ]
+      }
+    },
+
+    assemble: {
+      ...
+    },
+
+    connect: {
+      options: {
+        port: <span class="hljs-number">9005</span>,
+        livereload: <span class="hljs-number">19005</span>,
+        hostname: <span class="hljs-string">'localhost'</span>
+      },
+      livereload: {
+        options: {
+          open: <span class="hljs-literal">true</span>,
+          base: [
+            <span class="hljs-string">'dist'</span>
+          ]
+        }
+      }
+    },
+
+    ...
+  });
+
+  ...
+
+  grunt.registerTask(<span class="hljs-string">'serve'</span>, [
+    <span class="hljs-string">'build'</span>,
+    <span class="hljs-string">'connect:livereload'</span>,
+    <span class="hljs-string">'watch'</span>
+  ]);
+
+  ...
+};</code></pre>
+<p>Connect will startup an embedded web server for us in the <code>dist</code> directory and opens up a browser window.
+Watch on the other hand makes sure that Assemble rebuilds the blog whenever a file changes.
+Additionally it triggers the live reload of the browser window, whenever the generation completes.</p>
+<p>We defined a new Grunt task called <code>serve</code> that pulls the complete blogging setup together.</p>
+<p>Execute it from the command line via</p>
+<pre><code class="hljs language-bash">grunt serve</code></pre>
+<h3 id="adding-attachments">Adding attachments</h3>
+<p>Attachments are a one of the biggest pain points for browser based blogging solutions.
+In our setup, however, they are a pretty straight forward thing to implement.</p>
+<p>For simplicity, we will use the assets feature that is built in into Assemble by putting all blog post attachments into a special asset directory. Let us call it <code>assets/attachments</code>.</p>
+<p>We use the <a href="https://github.com/gruntjs/grunt-contrib-copy">copy</a> task for grunt and configure it in the grunt file to pull all attachments into the <code>dist</code> folder:</p>
+<pre><code class="hljs language-javascript">module.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(grunt)</span> {</span>
+  ...
+
+  grunt.initConfig({
+    ...
+
+    watch: {
+      ...
+
+      copy: {
+        files: [
+          <span class="hljs-string">'assets/attachments/**/*'</span>
+        ],
+        tasks: [ <span class="hljs-string">'copy:attachments'</span> ]
+      },
+      ...
+    },
+
+    copy: {
+      attachments: {
+        files: [
+          {
+            cwd: <span class="hljs-string">'assets'</span>,
+            src: [ <span class="hljs-string">'attachments/**/*'</span> ],
+            dest: <span class="hljs-string">'dist'</span>,
+            expand: <span class="hljs-literal">true</span>
+          }
+        ]
+      }
+    },
+
+    ...
+  });
+
+  ...
+
+  <span class="hljs-comment">// updated build task</span>
+
+  grunt.registerTask(<span class="hljs-string">'build'</span>, [
+    <span class="hljs-string">'clean'</span>,
+    <span class="hljs-string">'less'</span>,
+    <span class="hljs-string">'copy'</span>,
+    <span class="hljs-string">'assemble'</span>
+  ]);
+};</code></pre>
+<p>To reference attachments in your blog posts, simply use the <code>{{ assets }} /attachments/path/to/attachment</code> markup in a post. Assemble will replace the <code>{{ assets }}</code> placeholder with the relative location to the <code>assets</code> folder.</p>
+<h2 id="versioning-and-publishing">Versioning and publishing</h2>
+<p>Versioning is best done by version control systems, such as <a href="http://www.git-scm.com/">git</a>.</p>
+<p>Using <a href="https://github.com">GitHub</a>, you can version your blog sources.
+Thanks to <a href="https://pages.github.com">GitHub pages</a> you can publish the generated blog online in no time, too.</p>
+<h3 id="setup-a-repository">Setup a repository</h3>
+<p>Make sure you have <a href="http://www.git-scm.com/">git</a> installed on your machine and a <a href="https://help.github.com/articles/creating-a-new-repository">GitHub repository created for the blog</a>.</p>
+<p>Create a local git repository in the blog directory via</p>
+<pre><code class="hljs language-bash">git init
+git remote add origin &lt;url-to-remote-git-repo&gt;</code></pre>
+<p>To setup the <code>gh-pages</code> branch for the generated blog, clean the <code>dist</code> directory first.
+Then from within the directory execute</p>
+<pre><code class="hljs language-bash">git clone &lt;url-to-remote-git-repo&gt; .
+git checkout -b gh-pages</code></pre>
+<p>This sets up the <code>gh-pages</code> branch in the dist directory.</p>
+<h3 id="add-a-gitignore-file">Add a .gitignore file</h3>
+<p>Make sure you do not accidently push the generated blog into your main repository by adding a <code>.gitignore</code> file with the following contents to the root of your blog project:</p>
+<pre><code class="hljs language-bash">node_modules/
+dist/</code></pre>
+<h3 id="check-in">Check-in</h3>
+<p>If your blog looks fine through <code>grunt serve</code>, it will probably look fine on the web, too.
+Commit all project changes from the root of your blog project via</p>
+<pre><code class="hljs language-bash">git add -A
+git commit -m <span class="hljs-string">"update changes"</span>
+git push origin master</code></pre>
+<h3 id="publish">Publish</h3>
+<p>To publish the changes to GitHub pages commit and push them from within the <code>dist</code> directory</p>
+<pre><code class="hljs language-bash">git add -A
+git commit -m <span class="hljs-string">"blog update"</span>
+git push origin gh-pages</code></pre>
+<p>Browse <code>https://&lt;your-name&gt;.github.io/&lt;blog-project-name&gt;</code>.
+Your blog should be up and running.</p>
+<h2 id="summary">Summary</h2>
+<p>This blog post went through the creation of a developer friendly blogging setup with <a href="http://assemble.io">Assemble</a>.
+Assemble integrates well into a web developers tool belt.
+As a result things such as live reload, attachment handling, css style compilation and minification are just a few configuration steps away.</p>
+<p>By publishing the blog to <a href="https://pages.github.com">GitHub pages</a> it is hosted 100% hazzle free and still under your full control. No credentials needed, because it is just a <code>git push</code> to get changes up and running.</p>
+<p>If you want to checkout a full running version of the described setup, inspect the <a href="https://github.com/Nikku/lefedt.de">sources of this website</a>.</p>
+<p>Blog reclaimed, achivement unlocked.</p>
+
+  </div>
+
+  <div class="meta">
+    Posted by <a class="author" href="https://github.com/Nikku">Nico Rehwaldt</a> on <a href="2014-building-a-github-pages-blog-with-assemble.html">2014-06-16 20:00 +0200</a>.
+  </div>
+</div>
+    </div>
+
+    <div class="col-md-3">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce elementum, tortor et pharetra venenatis, massa neque vestibulum nisi, adipiscing bibendum lectus libero eget ligula. Nulla facilisi. Aenean vel ipsum molestie, volutpat enim ac, blandit nulla. Suspendisse potenti. Suspendisse vulputate ultricies mattis. Donec ornare tristique tortor sit amet interdum. Aliquam erat volutpat. In fringilla risus augue, vel aliquam dui eleifend sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras et turpis vehicula, vehicula felis sit amet, interdum ante. Aliquam mollis purus magna, non aliquam nisl ornare ac.
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 lft-blog-footer">
+      <a href="../../blog">Back to blog</a>.
+    </div>
+  </div>
+</div>
+    </div>
+
+    
+
+<footer class="lft-footer" role="contentinfo">
+  <div class="container">
+    <ul class="footer-links muted">
+      <li><a href="../../blog">Blog</a></li>
+      <li>·</li>
+      <li><a href="../../about">About</a></li>
+      <li>·</li>
+      <li><a href="../../projects">Projects</a></li>
+      <li>·</li>
+      <li><a href="https://twitter.com/nrehwaldt">Twitter</a></li>
+      <li>·</li>
+      <li><a href="https://github.com/Nikku">GitHub</a></li>
+      <li>·</li>
+      <li><a href="../../legal/imprint.html">Imprint</a></li>
+    </ul>
+  </div>
+</footer>
+
+    <!-- scripts -->
+    <script src="../../assets/js/jquery.min.js"></script>
+    <script src="../../assets/js/bootstrap.min.js"></script>
+
+    
+
+  </body>
+</html>
