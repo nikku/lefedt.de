@@ -213,13 +213,6 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
 
-    watch: {
-      assemble: {
-        files: [ 'site/**/*.{md,hbs,yml}' ],
-        tasks: [ 'assemble' ]
-      }
-    },
-
     assemble: {
       options: {
         flatten: true,
