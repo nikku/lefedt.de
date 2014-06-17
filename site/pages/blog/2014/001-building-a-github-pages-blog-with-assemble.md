@@ -6,9 +6,12 @@ layout: blogpost.hbs
 slug: 2014-building-a-github-pages-blog-with-assemble
 author: Nico Rehwaldt<https://github.com/Nikku>
 
+tags: [ "blog", "Assemble", "Grunt", "NodeJS" ]
+
 published: 2014-06-16 20:00
 
 ---
+
 
 <p class="intro">
   This post shows you how to create a simple, 100% developer friendy blogging setup.
