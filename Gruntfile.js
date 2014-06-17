@@ -41,7 +41,7 @@ module.exports = function (grunt) {
           },
           {
             cwd: '<%= config.assets %>',
-            src: [ 'css/**/*.*', 'img/**/*.*', 'font/lefedt.*' ],
+            src: [ 'css/**/*.*', 'js/**/*.*', 'img/**/*.*', 'attachments/**/*', 'font/lefedt.*' ],
             dest: '<%= config.dist %>/assets',
             expand: true
           }
@@ -61,7 +61,9 @@ module.exports = function (grunt) {
       copy: {
         files: [
           '<%= config.assets %>/img/**/*',
+          '<%= config.assets %>/js/**/*',
           '<%= config.assets %>/css/**/*',
+          '<%= config.assets %>/attachments/**/*',
           '<%= config.assets %>/font/lefedt.*',
           '<%= config.site %>/index.html'
         ],
@@ -110,6 +112,7 @@ module.exports = function (grunt) {
           'assemble-contrib-permalinks'
         ],
         helpers: [
+          'handlebars-helper-compose',
           '<%= config.site %>/helpers/**/*.js'
         ]
       },
