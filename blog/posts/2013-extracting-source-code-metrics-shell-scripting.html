@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="author" content="Nico Rehwaldt">
+
+    <title>Extracting source code metrics with shell scripting - lefedt.de</title>
+
+    <link rel="stylesheet" href="../../assets/css/highlight.css">
+
+    <link rel="stylesheet" href="../../assets/css/lefedt.css">
+    <link rel="icon" href="../../assets/favicon.ico">
+  </head>
+  <body>
+
+    
+
+
+<header class="navbar navbar-default navbar-static-top">
+  <div class="container">
+
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".lft-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand" href="../..">lefedt</a>
+    </div>
+
+    <nav class="collapse navbar-collapse lft-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="../../projects">Projects</a></li>
+        <li><a href="../../blog">Blog</a></li>
+        <li><a href="../../about">About</a></li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+
+    <div class="lft-content">
+      
+
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-3 lft-sidebar">
+
+      <h4>Hello!</h4>
+
+      <p>
+        <img class="img-bordered img-responsive" style="height: 100px" src="../../assets/img/me.jpg" />
+      </p>
+
+      <p>
+        I am a web developer and write about open source, modern web development and my own projects.
+      </p>
+
+      <h4>Resources</h4>
+
+      <ul>
+        <li><a href="../../about">About me</a></li>
+        <li><a href="https://twitter.com/nrehwaldt">@nrehwaldt</a></li>
+        <li><a href="https://github.com/Nikku">GitHub</a></li>
+      </ul>
+
+    </div>
+
+    <div class="col-md-9">
+      
+
+<div class="lft-blogpost">
+
+  <div class="published">
+    08 Dec 2013
+  </div>
+
+  <h1 class="page-header"><a href="./2013-extracting-source-code-metrics-shell-scripting.html">Extracting source code metrics with shell scripting</a></h1>
+
+  <div class="content">
+    <p class="intro">
+  Recently I was looking at a project and wanted to capture a number of code metrics to see how the project developed over time.
+  It turns out some interesting metrics can easily be extracted with basic shell scripting.
+</p>
+
+<!-- continue -->
+
+
+<p>I wanted to figure out, whether the project grew or shrinked over time and how that relates to test code and the number of test cases.</p>
+<p>A few metrics that I was interested in were</p>
+<ul>
+<li>source code size (lines of code and files)</li>
+<li>test code size (lines of code and files)</li>
+<li>number of tests</li>
+</ul>
+<p>What I came up with is number of bash snippets that collected the information form me.</p>
+<h2 id="bash-for-the-win">Bash for the win</h2>
+<p>Given I wanted to scan the current directory <code>.</code> for source files matching <code>*.java</code> we may implement the metrics as follows:</p>
+<h4 id="number-of-files">Number of Files</h4>
+<pre><code class="hljs language-bash">find . -type f -name <span class="hljs-string">"*.java"</span> | wc <span class="hljs-operator">-l</span></code></pre>
+<h4 id="lines-of-code-loc-">Lines of Code (LOC)</h4>
+<pre><code class="hljs language-bash">find . -type f -name <span class="hljs-string">"*.java"</span> \
+  -exec cat {} \; | sed <span class="hljs-string">'/^\s*$/d'</span> | wc <span class="hljs-operator">-l</span></code></pre>
+<p>This excludes empty lines (<code>sed &#39;/^\s*$/d&#39;</code>).</p>
+<h4 id="number-of-tests">Number of Tests</h4>
+<pre><code class="hljs language-bash">find . -type f -name <span class="hljs-string">"*.java"</span> \
+  -exec cat {} \; | grep @Test | wc <span class="hljs-operator">-l</span></code></pre>
+<p>It scans for unit tests (in my case indentified by a <code>@Test</code> annotation).</p>
+<h2 id="over-time-metrics">Over Time Metrics</h2>
+<p>Based on the three metrics, over time data an be collected by browsing through the projects versioning history.
+I combined the above snippets <a href="https://gist.github.com/Nikku/4a4c0b7848bd78afc457">in a small script</a> that checks out a number of commits to collect the metrics of a project over a series of commits.</p>
+<p>It logs <code>commit_hash</code>, <code>src_files</code>, <code>test_files</code>, <code>src_loc</code>, <code>test_loc</code> and <code>num_tests</code> as comma separated values into a specified file. To use it, collect all commits you would like to analyse via <code>git rev-list first_commit..last_commit</code> first.</p>
+<p>This results in a CSV file with all information in place, ready to be visualized.</p>
+<h2 id="summary">Summary</h2>
+<p>As it turned out, shell scripting is an appropriate environment do do quick and dirty extraction of source code metrics.
+The performance is well enough for a nightly job, too.
+On my developer machine for around 90k lines of code project, the scanning takes aproximately five seconds per commit.</p>
+<p>Happy analyzing!</p>
+
+  </div>
+
+  <div class="meta">
+    Posted by <a class="author" href="https://github.com/Nikku">Nico Rehwaldt</a>.
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 lft-blog-footer">
+      <a href="../../blog">Back to blog</a>.
+    </div>
+  </div>
+</div>
+    </div>
+
+    
+
+<footer class="lft-footer" role="contentinfo">
+  <div class="container">
+    <ul class="footer-links muted">
+      <li><a href="../../blog">Blog</a></li>
+      <li>·</li>
+      <li><a href="../../about">About</a></li>
+      <li>·</li>
+      <li><a href="../../projects">Projects</a></li>
+      <li>·</li>
+      <li><a href="https://twitter.com/nrehwaldt">Twitter</a></li>
+      <li>·</li>
+      <li><a href="https://github.com/Nikku">GitHub</a></li>
+      <li>·</li>
+      <li><a href="../../legal/imprint.html">Imprint</a></li>
+    </ul>
+  </div>
+</footer>
+
+    <!-- scripts -->
+    <script src="../../assets/js/jquery.min.js"></script>
+    <script src="../../assets/js/bootstrap.min.js"></script>
+
+    
+
+  </body>
+</html>

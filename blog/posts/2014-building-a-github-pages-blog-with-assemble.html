@@ -21,6 +21,7 @@
 
 <header class="navbar navbar-default navbar-static-top">
   <div class="container">
+
     <div class="navbar-header">
       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".lft-navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
@@ -29,14 +30,17 @@
         <span class="icon-bar"></span>
       </button>
 
-      <a class="navbar-brand" href="../..">on paper</a>
+      <a class="navbar-brand" href="../..">lefedt</a>
     </div>
 
-    <ul class="nav navbar-nav navbar-right lft-navbar-collapse">
-      <li><a href="../../projects">Projects</a></li>
-      <li><a href="../../blog">Blog</a></li>
-      <li><a href="../../about">About</a></li>
-    </ul>
+    <nav class="collapse navbar-collapse lft-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="../../projects">Projects</a></li>
+        <li><a href="../../blog">Blog</a></li>
+        <li><a href="../../about">About</a></li>
+      </ul>
+    </nav>
+
   </div>
 </header>
 
@@ -46,26 +50,36 @@
 
 <div class="container">
   <div class="row">
+
+    <div class="col-md-3 lft-sidebar">
+
+      <h4>Hello!</h4>
+
+      <p>
+        <img class="img-bordered img-responsive" style="height: 100px" src="../../assets/img/me.jpg" />
+      </p>
+
+      <p>
+        I am a web developer and write about open source, modern web development and my own projects.
+      </p>
+
+      <h4>Resources</h4>
+
+      <ul>
+        <li><a href="../../about">About me</a></li>
+        <li><a href="https://twitter.com/nrehwaldt">@nrehwaldt</a></li>
+        <li><a href="https://github.com/Nikku">GitHub</a></li>
+      </ul>
+
+    </div>
+
     <div class="col-md-9">
-
       
 
-<div class="lft-header">
-  <!--
-  <div class="h1">Blog</div>
-  -->
-
-  <p class="h4">
-    random thoughts
-  </p>
-</div>
-
-      
-
-<div class="lft-blogpost single">
+<div class="lft-blogpost">
 
   <div class="published">
-    Monday, June 16, 2014
+    16 Jun 2014
   </div>
 
   <h1 class="page-header"><a href="./2014-building-a-github-pages-blog-with-assemble.html">A developer friendly blog setup with Assemble + GitHub pages</a></h1>
@@ -572,13 +586,9 @@ As a result things such as live reload, attachment handling, css style compilati
   </div>
 
   <div class="meta">
-    Posted by <a class="author" href="https://github.com/Nikku">Nico Rehwaldt</a> on <a href="2014-building-a-github-pages-blog-with-assemble.html">2014-06-16 20:00 +0200</a>.
+    Posted by <a class="author" href="https://github.com/Nikku">Nico Rehwaldt</a>.
   </div>
 </div>
-    </div>
-
-    <div class="col-md-3">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce elementum, tortor et pharetra venenatis, massa neque vestibulum nisi, adipiscing bibendum lectus libero eget ligula. Nulla facilisi. Aenean vel ipsum molestie, volutpat enim ac, blandit nulla. Suspendisse potenti. Suspendisse vulputate ultricies mattis. Donec ornare tristique tortor sit amet interdum. Aliquam erat volutpat. In fringilla risus augue, vel aliquam dui eleifend sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras et turpis vehicula, vehicula felis sit amet, interdum ante. Aliquam mollis purus magna, non aliquam nisl ornare ac.
     </div>
   </div>
 </div>
