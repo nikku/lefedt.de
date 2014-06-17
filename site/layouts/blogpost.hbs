@@ -2,21 +2,21 @@
 layout: blog.hbs
 ---
 
-<div class="lft-blogpost single">
+<div class="lft-blogpost">
 
   <div class="published">
-    {{ moment published format="dddd, MMMM DD, YYYY" }}
+    {{ moment published format="DD MMM YYYY" }}
   </div>
 
   <h1 class="page-header"><a href="./{{slug}}.html">{{ title }}</a></h1>
 
   <div class="content">
-    {{#markdown }}
+    {{#markdown}}
       {{> body}}
     {{/markdown}}
   </div>
 
   <div class="meta">
-    Posted by {{ author author }} on <a href="{{slug}}.html">{{ moment published format="YYYY-MM-DD HH:mm ZZ" }}</a>.
+    Posted by {{ author author }}.
   </div>
 </div>

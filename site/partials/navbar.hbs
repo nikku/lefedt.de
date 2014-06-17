@@ -5,6 +5,7 @@ component: navbar
 
 <header class="navbar navbar-default navbar-static-top">
   <div class="container">
+
     <div class="navbar-header">
       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".lft-navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
@@ -13,13 +14,16 @@ component: navbar
         <span class="icon-bar"></span>
       </button>
 
-      <a class="navbar-brand" href="{{relative page.dest "dist/."}}">on paper</a>
+      <a class="navbar-brand" href="{{relative page.dest "dist/."}}">lefedt</a>
     </div>
 
-    <ul class="nav navbar-nav navbar-right lft-navbar-collapse">
-      <li><a href="{{relative page.dest "dist/projects/" }}">Projects</a></li>
-      <li><a href="{{relative page.dest "dist/blog/" }}">Blog</a></li>
-      <li><a href="{{relative page.dest "dist/about/" }}">About</a></li>
-    </ul>
+    <nav class="collapse navbar-collapse lft-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{{relative page.dest "dist/projects/" }}">Projects</a></li>
+        <li><a href="{{relative page.dest "dist/blog/" }}">Blog</a></li>
+        <li><a href="{{relative page.dest "dist/about/" }}">About</a></li>
+      </ul>
+    </nav>
+
   </div>
 </header>

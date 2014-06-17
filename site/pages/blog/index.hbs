@@ -10,7 +10,7 @@ layout: 'blog.hbs'
 <div class="lft-blogpost-preview">
 
   <div class="published">
-    {{ moment @published format="dddd, MMMM DD, YYYY" }}
+    {{ moment @published format="DD MMM YYYY" }}
   </div>
 
   <h2 class="page-header"><a href="posts/{{@slug}}.html">{{ @title }}</a></h2>
@@ -22,7 +22,7 @@ layout: 'blog.hbs'
   </div>
 
   <div class="meta">
-    Posted by {{ author @author }} on <a href="posts/{{@slug}}.html">{{ moment @published format="DD MMMM YYYY HH:mm ZZ" }}</a>.
+    Posted by {{ author @author }}.
   </div>
 </div>
 

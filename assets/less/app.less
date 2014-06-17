@@ -51,7 +51,6 @@ footer {
 
 .lft-blogpost {
 
-  margin-top: 20px;
   margin-bottom: 50px;
 
   .intro {
@@ -63,8 +62,16 @@ footer {
 .lft-blogpost,
 .lft-blogpost-preview {
 
+  margin-top: 20px;
+
   .page-header {
     margin-top: 10px;
+  }
+}
+
+@media (max-width: @screen-sm-min) {
+  .lft-blogpost {
+    margin-top: 50px;
   }
 }
 
@@ -75,7 +82,19 @@ footer {
   color: inherit;
 }
 
+.lft-sidebar h4 {
+  padding-bottom: 8px;
+  margin: 20px 0 15px;
+  border-bottom: 1px solid #EEE;
+}
+
 .img-bordered {
   padding: 3px;
   border: solid 1px #EEE;
+}
+
+.half-rule {
+  margin-top: 50px;
+  margin-bottom: 80px;
+  width: 60px;
 }

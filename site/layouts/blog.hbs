@@ -5,15 +5,31 @@ layout: base.hbs
 
 <div class="container">
   <div class="row">
-    <div class="col-md-9">
 
-      {{> blog-header }}
+    <div class="col-md-3 lft-sidebar">
 
-      {{> body }}
+      <h4>Hello!</h4>
+
+      <p>
+        <img class="img-bordered img-responsive" style="height: 100px" src="{{ assets }}/img/me.jpg" />
+      </p>
+
+      <p>
+        I am a web developer and write about open source, modern web development and my own projects.
+      </p>
+
+      <h4>Resources</h4>
+
+      <ul>
+        <li><a href="{{ relative page.dest "dist/about/" }}">About me</a></li>
+        <li><a href="https://twitter.com/nrehwaldt">@nrehwaldt</a></li>
+        <li><a href="https://github.com/Nikku">GitHub</a></li>
+      </ul>
+
     </div>
 
-    <div class="col-md-3">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce elementum, tortor et pharetra venenatis, massa neque vestibulum nisi, adipiscing bibendum lectus libero eget ligula. Nulla facilisi. Aenean vel ipsum molestie, volutpat enim ac, blandit nulla. Suspendisse potenti. Suspendisse vulputate ultricies mattis. Donec ornare tristique tortor sit amet interdum. Aliquam erat volutpat. In fringilla risus augue, vel aliquam dui eleifend sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras et turpis vehicula, vehicula felis sit amet, interdum ante. Aliquam mollis purus magna, non aliquam nisl ornare ac.
+    <div class="col-md-9">
+      {{> body }}
     </div>
   </div>
 </div>
