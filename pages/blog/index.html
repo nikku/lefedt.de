@@ -9,3 +9,6 @@ layout: posts
 {% block item %}
   {{ render(item) | excerpt(relative('blog/posts/' + item.slug)) }}
 {% endblock %}
+
+{% block meta %}
+{% endblock %}

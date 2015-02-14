@@ -18,6 +18,12 @@
           {{ render(item) }}
         {% endblock %}
       </div>
+
+      {% block meta %}
+        <div class="meta">
+          Tagged as [ {% for tag in item.tags %}<a href="{{ relative('blog/_tagged/' + tag) }}">{{ tag }}</a>{% if loop.last != true %}, {% endif %}{% endfor %} ]
+        </div>
+      {% endblock %}
     </div>
 
     <hr class="half-rule">

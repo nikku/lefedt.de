@@ -16,9 +16,11 @@
       {% endblock %}
     </div>
 
-    <div class="meta">
-      Tagged as [ {% for tag in tags %}{{ tag }}{% if loop.last != true %}, {% endif %}{% endfor %} ]
-    </div>
+    {% block meta %}
+      <div class="meta">
+        Tagged as [ {% for tag in tags %}<a href="{{ relative('blog/_tagged/' + tag) }}">{{ tag }}</a>{% if loop.last != true %}, {% endif %}{% endfor %} ]
+      </div>
+    {% endblock %}
 
   </div>
 {% endblock %}
