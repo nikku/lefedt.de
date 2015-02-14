@@ -1,3 +1,5 @@
 node_modules/
-bower_components/
 dist/
+bower_components/bootstrap/*
+bower_components/jquery/*
+!bower_components/bootstrap/less
