@@ -1,0 +1,171 @@
+/* <sticky-footer> */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: @footer-height + 1;
+}
+/* </sticky-footer> */
+
+/* <footer> */
+footer {
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    line-height: @footer-height;
+
+    li {
+      padding: 0 5px;
+      display: inline;
+    }
+  }
+}
+/* </footer> */
+
+.blg-content {
+  padding-bottom: 50px;
+}
+
+.blg-blogpost {
+
+  margin-bottom: 50px;
+
+  .intro {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+}
+
+.blg-blogpost,
+.blg-blogpost-preview {
+  margin-top: 20px;
+
+  .meta {
+    margin-top: 30px;
+  }
+}
+
+.page-header, .jumbotron {
+  margin-top: 30px;
+}
+
+@media (max-width: @screen-sm-min) {
+  .blg-blogpost {
+    margin-top: 50px;
+  }
+}
+
+.blg-blogpost .page-header a,
+.blg-blogpost-preview .page-header a,
+.header .brand,
+.jumbotron .lead a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.blg-sidebar h4 {
+  padding-bottom: 8px;
+  margin: 20px 0 15px;
+  border-bottom: 1px solid #EEE;
+}
+
+.img-bordered {
+  padding: 3px;
+  border: solid 1px #EEE;
+}
+
+.half-rule {
+  margin-top: 50px;
+  margin-bottom: 80px;
+  width: 60px;
+}
+
+/**
+ * font-config
+ */
+.header .brand {
+  color: @headings-color;
+}
+
+/**
+ * header
+ */
+.header {
+  .brand {
+    font-family: @headings-font-family;
+    font-weight: @headings-font-weight;
+    line-height: @headings-line-height;
+    font-size: 72px;
+
+    text-decoration: none;
+
+    margin: 40px 0 20px;
+    display: inline-block;
+
+    .asterix {
+      color: rgb(95, 161, 163);
+    }
+  }
+}
+
+
+/**
+ * navigation
+ */
+.blg-navigation {
+
+  background: #FCFCFC;
+  padding: 10px;
+  border: 1px #DDD;
+  border-style: solid none;
+
+  margin-bottom: 15px;
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    li {
+      display: inline-block;
+      padding: 3px 4px;
+    }
+  }
+}
+
+
+/**
+ * blog post
+ */
+.blg-content img {
+  max-width: 100%;
+  padding: 5px;
+  border: solid 1px #DDD;
+  border-radius: 3px;
+
+  margin: 10px auto;
+}
+
+.blg-content .published {
+  margin-bottom: 30px;
+  margin-top: -10px;
+  color: #999;
+}
+
+.blg-content .alert {
+  margin-top: 20px;
+}

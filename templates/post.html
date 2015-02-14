@@ -1,0 +1,24 @@
+{% extends "blog.html" %}
+
+{% block content %}
+  <div class="blg-blogpost">
+
+    <h1 class="page-header">
+      <a href="{{ relative('blog/posts/' + slug) }}">{{ title }}</a>
+    </h1>
+
+    <div class="published">
+      {{ published | date("DD MMM YYYY") }} / posted by {{ author | author }}
+    </div>
+
+    <div class="content">
+      {% block item_body %}
+      {% endblock %}
+    </div>
+
+    <div class="meta">
+      Tagged as [ {% for tag in tags %}{{ tag }}{% if loop.last != true %}, {% endif %}{% endfor %} ]
+    </div>
+
+  </div>
+{% endblock %}

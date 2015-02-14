@@ -1,0 +1,10 @@
+<br/>
+<br/>
+
+<h3>Ideenwolke</h3>
+
+<div class="tag-cloud">
+{% for tag, details in tagged %}
+  <a class="tag" href="{{ relative('_tagged/' + tag) }}" style="font-size: {{ 0.9 + 0.1 * details.items.length}}em">{{ tag }}</a>{% if loop.last != true %}, {% endif %}
+{% endfor %}
+</div>

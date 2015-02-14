@@ -1,0 +1,11 @@
+---
+
+title: Blog
+description: random thoughts
+layout: posts
+
+---
+
+{% block item %}
+  {{ render(item) | excerpt(relative('blog/posts/' + item.slug)) }}
+{% endblock %}

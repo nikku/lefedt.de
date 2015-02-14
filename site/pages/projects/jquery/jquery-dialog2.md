@@ -1,9 +1,0 @@
----
-
-title: jquery-dialog2
-technologies: [ "jQuery", "Bootstrap" ]
-status: "discontinued"
-
----
-
-__[jquery-dialog2](https://nikku.github.io/jquery-bootstrap-scripting)__ - declarative, markup centric ajax dialog flow library for jQuery / Bootstrap

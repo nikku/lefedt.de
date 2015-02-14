@@ -1,8 +1,5 @@
-'use strict';
-
 module.exports = function (grunt) {
 
-  require('time-grunt')(grunt);
   require('load-grunt-tasks')(grunt);
 
   grunt.initConfig({
@@ -10,8 +7,9 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     config: {
-      site: 'site',
       dist: 'dist',
+      pages: 'pages',
+      templates: 'templates',
       assets: 'assets',
       libs: {
         bootstrap: 'bower_components/bootstrap'
@@ -25,7 +23,7 @@ module.exports = function (grunt) {
           paths: [ '<%= config.assets %>/less', '<%= config.libs.bootstrap %>/less' ]
         },
         files: {
-          '<%= config.dist %>/assets/css/lefedt.css': '<%= config.assets %>/less/lefedt.less'
+          '<%= config.dist %>/assets/css/blog.css': '<%= config.assets %>/less/blog.less'
         }
       }
     },
@@ -34,14 +32,8 @@ module.exports = function (grunt) {
       resources: {
         files: [
           {
-            cwd: '<%= config.site %>',
-            src: [ 'index.html' ],
-            dest: '<%= config.dist %>',
-            expand: true
-          },
-          {
             cwd: '<%= config.assets %>',
-            src: [ 'css/**/*.*', 'js/**/*.*', 'img/**/*.*', 'attachments/**/*', 'font/lefedt.*' ],
+            src: [ 'vendor/**/*', 'img/**/*', 'attachments/**/*' ],
             dest: '<%= config.dist %>/assets',
             expand: true
           }
@@ -50,9 +42,9 @@ module.exports = function (grunt) {
     },
 
     watch: {
-      assemble: {
-        files: [ '<%= config.site %>/**/*.{md,hbs,yml}' ],
-        tasks: [ 'assemble' ]
+      kartoffeldruck: {
+        files: [ '<%= config.pages %>/**/*', '<%= config.templates %>/**/*' ],
+        tasks: [ 'kartoffeldruck' ]
       },
       less: {
         files: [ '<%= config.assets %>/less/*.less' ],
@@ -61,11 +53,8 @@ module.exports = function (grunt) {
       copy: {
         files: [
           '<%= config.assets %>/img/**/*',
-          '<%= config.assets %>/js/**/*',
-          '<%= config.assets %>/css/**/*',
-          '<%= config.assets %>/attachments/**/*',
-          '<%= config.assets %>/font/lefedt.*',
-          '<%= config.site %>/index.html'
+          '<%= config.assets %>/vendor/**/*',
+          '<%= config.assets %>/attachments/**/*'
         ],
         tasks: [ 'copy:resources' ]
       },
@@ -96,72 +85,8 @@ module.exports = function (grunt) {
       }
     },
 
-    assemble: {
-      options: {
-        app: '<%= config %>',
-        flatten: true,
-        marked: {
-          process: true
-        },
-        assets: '<%= config.dist %>/assets',
-        layoutdir: '<%= config.site %>/layouts',
-        layout: 'default.hbs',
-        data: '<%= config.site %>/data/*.{json,yml}',
-        partials: '<%= config.site %>/partials/*.hbs',
-        plugins: [
-          'assemble-contrib-permalinks'
-        ],
-        helpers: [
-          'handlebars-helper-compose',
-          '<%= config.site %>/helpers/**/*.js'
-        ]
-      },
-      main: {
-        files: {
-          '<%= config.dist %>/': [ '<%= config.site %>/pages/*.hbs' ],
-          '<%= config.dist %>/projects/': [ '<%= config.site %>/pages/projects/*.hbs' ],
-          '<%= config.dist %>/about/': [ '<%= config.site %>/pages/about/*.hbs' ],
-          '<%= config.dist %>/legal/': [ '<%= config.site %>/pages/legal/*.hbs' ]
-        }
-      },
-      blog: {
-        options: {
-          marked: {
-            process: true,
-            langPrefix: 'hljs language-',
-            highlight: function(code, lang) {
-              var hjs = require('highlight.js');
-
-              var result;
-              if (lang) {
-                result = hjs.highlight(lang, code);
-              } else {
-                result = hjs.highlightAuto(code);
-              }
-
-              return result.value;
-            }
-          },
-          helpers: [
-            'handlebars-helper-compose',
-            'handlebars-helper-moment'
-          ],
-          permalinks: {
-            structure: ':slug.html'
-          }
-        },
-        files: {
-          '<%= config.dist %>/blog/': [ '<%= config.site %>/pages/blog/*.hbs' ],
-          '<%= config.dist %>/blog/posts/': [ '<%= config.site %>/pages/blog/*/*.{md,hbs}' ]
-        }
-      }
-    },
-
     clean: [ '<%= config.dist %>/**/*' ]
   });
-
-  // assemble incompatible with load-grunt-tasks
-  grunt.loadNpmTasks('assemble');
 
   grunt.registerTask('serve', [
     'build',
@@ -173,8 +98,13 @@ module.exports = function (grunt) {
     'clean',
     'less',
     'copy',
-    'assemble'
+    'kartoffeldruck'
   ]);
+
+  grunt.registerTask('kartoffeldruck', function() {
+    var kartoffeldruck = require('kartoffeldruck');
+    kartoffeldruck.run();
+  });
 
   grunt.registerTask('default', [ 'build' ]);
 };

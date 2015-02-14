@@ -1,0 +1,45 @@
+---
+title: Home
+layout: base
+---
+
+{% block body %}
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="row">
+
+        <div class="col-sm-3">
+          <img class="img-bordered img-responsive" style="margin: 35px 5px auto auto" src="{{ assets }}/img/me.jpg" />
+        </div>
+
+        <div class="col-sm-9">
+          <div class="jumbotron">
+
+            <h1>Hallo!</h1>
+
+            <p class="lead">
+              I am Nico Rehwaldt, a software engineer from <a href="https://www.google.de/maps/place/Berlin">Berlin, Germany</a>.
+            </p>
+
+            <p>
+              This site is a compilation of my <a href="{{ relative('projects') }}">projects</a> as well as
+              <a href="{{ relative('blog') }}">random thoughts on technology</a>.
+
+              Take a look around, <a href="{{ relative('about') }}">learn more about me</a> or check my open source footprint on <a href="https://github.com/nikku">GitHub</a>.
+            </p>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

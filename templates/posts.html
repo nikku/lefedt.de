@@ -1,0 +1,37 @@
+{% extends "blog.html" %}
+
+{% block content %}
+
+  {% for item in items %}
+    <div class="blg-blogpost-preview">
+
+      <h2 class="h1 page-header">
+        <a href="{{ relative('blog/posts/' + item.slug) }}">{{ item.title }}</a>
+      </h2>
+
+      <div class="published">
+        {{ item.published | date("DD MMM YYYY") }} / posted by {{ item.author | author }}
+      </div>
+
+      <div class="content">
+        {% block item %}
+          {{ render(item) }}
+        {% endblock %}
+      </div>
+    </div>
+
+    <hr class="half-rule">
+  {% endfor %}
+
+  <nav>
+    <ul class="pager">
+      {% if page.previousRef != null %}
+      <li class="previous"><a href="{{ relative(page.previousRef) }}"><span aria-hidden="true">&larr;</span> Newer</a></li>
+      {% endif %}
+      {% if page.nextRef != null %}
+      <li class="next"><a href="{{ relative(page.nextRef) }}">Older <span aria-hidden="true">&rarr;</span></a></li>
+      {% endif %}
+    </ul>
+  </nav>
+
+{% endblock %}
