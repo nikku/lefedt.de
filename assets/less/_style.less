@@ -5,7 +5,7 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+  margin-bottom: @footer-height;
 }
 
 footer {
@@ -13,27 +13,27 @@ footer {
   bottom: 0;
   width: 100%;
   height: @footer-height + 1;
+
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 /* </sticky-footer> */
 
 /* <footer> */
 footer {
-  color: #777;
   border-top: 1px solid #e5e5e5;
 
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  font-size: 16px;
 
-    line-height: @footer-height;
+  .footer-links {
+    margin: 20px -4px 0;
+  }
 
-    li {
-      padding: 0 5px;
-      display: inline;
-    }
+  p {
+    margin: 0 0 10px;
   }
 }
+
 /* </footer> */
 
 .blg-content {
@@ -129,24 +129,24 @@ footer {
 .blg-navigation {
 
   background: #FCFCFC;
-  padding: 10px;
+  padding: 13px 0;
   border: 1px #DDD;
   border-style: solid none;
 
   margin-bottom: 15px;
-
-  ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-
-    li {
-      display: inline-block;
-      padding: 3px 4px;
-    }
-  }
 }
 
+ul.nav,
+ul.footer-links {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  li {
+    display: inline-block;
+    margin-right: 8px;
+  }
+}
 
 /**
  * blog post
@@ -168,4 +168,13 @@ footer {
 
 .blg-content .alert {
   margin-top: 20px;
+}
+
+.muted {
+
+  a:not(:hover) {
+    color: #8d959b;
+  }
+
+  color: #CCC;
 }
