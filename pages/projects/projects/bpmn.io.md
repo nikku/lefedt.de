@@ -9,4 +9,4 @@ created: 2014
 ---
 
 
-__[bpmn.io](https://github.com/bpmn-io)__ - A BPMN 2.0 visualization tool and web modeler
+__[bpmn.io](https://github.com/bpmn-io)__ - Web-based toolkits editors for BPMN 2.0, DMN and CMMN
