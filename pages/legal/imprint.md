@@ -10,8 +10,8 @@ _[German law demands this]_
 
 <adress>
 Nico Rehwaldt<br/>
-Fredersdorfer Straße 13<br/>
-10243 Berlin<br/>
+Rigaer Straße 18 H<br/>
+10247 Berlin<br/>
 </adress>
 
 <br/>
