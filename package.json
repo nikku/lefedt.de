@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "sources of lefedt.de",
   "scripts": {
+    "all": "npm run build",
     "dev": "grunt serve",
     "build": "grunt build"
   },
