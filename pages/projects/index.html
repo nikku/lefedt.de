@@ -5,20 +5,24 @@ layout: default
 
 ---
 
-{% block item_body %}
+{% block body %}
+  <div class="container">
+    <h1>{{ title }}</h1>
 
-  <p style="margin-bottom: 30px">
-    A incomplete list of things I work (and worked) on.
-  </p>
+    <p style="margin-bottom: 30px">
+      A incomplete list of things I work (and worked) on.
+    </p>
 
-  <div class="items" style="margin-left: 20px">
-    {% for item in items %}
-      {{ render(item) }}
-    {% endfor %}
+    <div class="items" style="margin-left: 20px">
+      {% for item in items %}
+        {{ render(item) }}
+      {% endfor %}
+    </div>
+
+    <p style="margin-top: 50px">
+      Check out all my projects <a href="https://github.com/nikku">on GitHub</a>.
+    </p>
   </div>
-
-  <p style="margin-top: 50px">
-    Check out all my projects <a href="https://github.com/nikku">on GitHub</a>.
-  </p>
-
 {% endblock %}
+
+
