@@ -1,4 +1,4 @@
-var forEach = require('lodash/collection/forEach');
+var forEach = require('lodash/forEach');
 
 var byPublished = function(a, b) {
   return a.published < b.published ? 1 : (a.published === b.published ? 0 : -1);
