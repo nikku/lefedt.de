@@ -15,7 +15,7 @@ published: 2015-02-14
 
 <p class="intro">
   There is probably around one thousand three hundred thirty seven static site generators out there.
-  So why build [a new one](https://github.com/nikku/kartoffeldruck)? Because it could be a 300 lines of code only, all-in-one, swiss army knife, hackable one. Kind of.
+  So why build <a href="https://github.com/nikku/kartoffeldruck">a new one</a>? Because it could be a 300 lines of code only, all-in-one, swiss army knife, hackable one. Kind of.
 </p>
 
 <!-- continue -->
@@ -134,7 +134,7 @@ druck.config.locals.tagged = tagged;
 It could also be used to generate overview pages, grouping posts by tag:
 
 ```javascript
-var forEach = require('lodash/object/forEach');
+var forEach = require('lodash/forEach');
 
 forEach(tagged, function(t) {
   druck.generate({
@@ -159,11 +159,11 @@ Kartoffeldruck supports Markdown files out of the box. For more complex page con
 Templates provide access to all local variables, including default locals exposed through the configuration. The following configuration will evaluate to `<h1>FOO</h1>` in the generated HTML file:
 
 ```markdown
----
+{% raw %}---
 title: FOO
 ---
 
-# \{\{ title }}
+# {{ title }}{% endraw %}
 ```
 
 
@@ -172,7 +172,7 @@ title: FOO
 Inside templates and Markdown files the `relative` helper is available. It inserts a link relative to the specified destination site, based on the location the current file is generated to.
 
 ```markdown
-Check the [about page](\{\{ relative('about') }})
+{% raw %}Check the [about page]({{ relative('about') }}){% endraw %}
 ```
 
 It will always generate correct reference to the `about` page, independent of whether the page is currently aggregated or generated as a single page.
@@ -181,13 +181,13 @@ It will always generate correct reference to the `about` page, independent of wh
 The `render` helper on the other hand allows you to include another page within the pages output. This is useful for aggregations.
 
 ```nunjucks
-\{\% for item in items %}
+{% raw %}{% for item in items %}
   <div class="item">
-    <h1><a href="\{\{ relative(item.name) }}">\{\{ item.title }}</a></h1>
+    <h1><a href="{{ relative(item.name) }}">{{ item.title }}</a></h1>
 
-    \{\{ render(item) \}\}
+    {{ render(item) }}
   </div>
-\{\% endfor %}
+{% endfor %}{% endraw %}
 ```
 
 ### Default Variables
@@ -195,7 +195,7 @@ The `render` helper on the other hand allows you to include another page within 
 The `assets` variable always points to a `assets/` directory that is supposed to contain all non-HTML files.
 
 ```markdown
-![a picture](\{\{ assets }}/blog/some-picture.jpg)
+{% raw %}![a picture]({{ assets }}/blog/some-picture.jpg){% endraw %}
 ```
 
 You have to take care about copying the images yourself. kartoffeldruck only knows about HTML assets.
@@ -207,14 +207,14 @@ During pagination kartoffeldruck makes the `page` object available in templates.
 
 It contains the links to the next as well as previous page.
 
-```
-\{\% if page.previousRef != null %}
-  <a href="\{\{ relative(page.previousRef) }}">previous</a>
-\{\% endif %}
+```nunjucks
+{% raw %}{% if page.previousRef != null %}
+  <a href="{{ relative(page.previousRef) }}">previous</a>
+{% endif %}
 
-\{\% if page.nextRef != null %}
-  <a href="\{\{ relative(page.nextRef) }}">next</a>
-\{\% endif %}
+{% if page.nextRef != null %}
+  <a href="{{ relative(page.nextRef) }}">next</a>
+{% endif %}{% endraw %}
 ```
 
 
@@ -223,24 +223,24 @@ It contains the links to the next as well as previous page.
 Nunjucks supports a sophisticated template inheritance scheme. Let us say a base template, i.e. `base.html` implements the general skeleton.
 
 ```nunjucks
-<html>
+{% raw %}<html>
   <head>
-    \{\% block header %}\{\% endblock %}
+    {% block header %}{% endblock %}
   </head>
   <body>
-    \{\% block body %}default body text\{\% endblock %}
+    {% block body %}default body text{% endblock %}
   </body>
-</html>
+</html>{% endraw %}
 ```
 
 Child templates can choose to extend from it, filling one or more placeholder blocks, i.e. to include custom scripts, meta data or page content:
 
 ```
-\{\% extends "base.html" %}
+{% raw %}{% extends "base.html" %}
 
-\{\% block body %}
+{% block body %}
   Specialized body content
-\{\% endblock %}
+{% endblock %}{% endraw %}
 ```
 
 
@@ -250,13 +250,13 @@ When using front matter definitions, the layout variable defines the parent temp
 This makes the above code equivalent to
 
 ```
----
+{% raw %}---
 layout: base
 ---
 
-\{\% block body %}
+{% block body %}
   Specialized body content
-\{\% endblock %}
+{% endblock %}{% endraw %}
 ```
 
 Markdown pages will be automatically rendered into a `item_body` block.
