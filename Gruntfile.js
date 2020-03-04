@@ -105,7 +105,10 @@ module.exports = function (grunt) {
     var kartoffeldruck = require('kartoffeldruck');
     kartoffeldruck.run({
       logger: {
-        log: grunt.log.ok
+        log: grunt.log.ok,
+        debug: grunt.log.ok,
+        info: grunt.log.ok,
+        error: grunt.log.error
       }
     });
   });

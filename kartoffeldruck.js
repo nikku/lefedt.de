@@ -17,7 +17,7 @@ module.exports = function(druck) {
 
   // install custom helpers
 
-  var nunjucks = druck.config.nunjucks;
+  var nunjucks = druck.getNunjucks();
 
   nunjucks.addFilter('date', require('nunjucks-date'));
   nunjucks.addFilter('author', require('./helpers/author'));
