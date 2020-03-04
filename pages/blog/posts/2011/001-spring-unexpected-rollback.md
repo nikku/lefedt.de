@@ -8,7 +8,7 @@ tags: [ java, web, spring, jpa, jersey, transactions ]
 
 author: Nikku<http://lefedt.de/about>
 
-published: 2011-07-5
+published: 2011-07-05
 
 ---
 
