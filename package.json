@@ -26,7 +26,7 @@
     "kartoffeldruck": "^3.0.0",
     "load-grunt-tasks": "^5.1.0",
     "lodash": "^4.17.15",
-    "nunjucks-date": "^1.1.2"
+    "nunjucks-date": "^1.5.0"
   },
   "dependencies": {
     "highlight.js": "^8.0.0"
