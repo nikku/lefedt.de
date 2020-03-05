@@ -102,15 +102,17 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('kartoffeldruck', function() {
-    var kartoffeldruck = require('kartoffeldruck');
-    kartoffeldruck.run({
+    var done = this.async();
+
+    require('kartoffeldruck').run({
       logger: {
-        log: grunt.log.ok,
         debug: grunt.log.ok,
-        info: grunt.log.ok,
-        error: grunt.log.error
+        info: grunt.log.ok
       }
-    });
+    }).then(
+      () => done(),
+      (err) => done(err)
+    );
   });
 
   grunt.registerTask('default', [ 'build' ]);
