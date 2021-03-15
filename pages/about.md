@@ -11,11 +11,11 @@ In a nutshell:
 
 *   I'm a software engineer located in <a href="https://www.google.de/maps/place/Berlin">Berlin, Germany</a>.
 
+*   I also build teams and create structures that empower and let work flow.
+
 *   I have experience in various fields of software engineering including but not limited to web programming using Java, JavaEE, Groovy, Ruby on Rails, Play, JavaScript, CSS, HTML, NodeJS and friends.
 
 *   Apart from web-development my main fields of interest are software architectures, rapid software development, developer and user experience, and software quality. Sometimes I like big data and the cloud, too.
-
-*   I build teams and create structures that empower and let work flow.
 
 *   I spent a foreign semester at the [BTH](bth.se) in [Karlskrona, Sweden](http://maps.google.se/maps?f=q&source=s_q&hl=en&geocode=&q=karlskrona&sll=61.606396,21.225586&sspn=28.283373,93.076172&ie=UTF8&hq=&hnear=Karlskrona,+Blekinge&t=h&z=9) and received my masters in IT Systems Engineering from the [Hasso-Plattner-Institute](http://www.hpi.uni-potsdam.de), University of Potsdam in Potsdam, Germany.
 
@@ -25,7 +25,7 @@ In a nutshell:
 
 *   I work at [Camunda](http://www.camunda.com/), a company that helps process centric business to scale through [BPM](https://en.wikipedia.org/wiki/Business_process_management).
 
-*   Most of the things I program are [open source](https://www.youtube.com/watch?v=a8fHgx9mE5U) and can be found on [GitHub](https://github.com/nikku).
+*   Most of the things I do are [open source](https://www.youtube.com/watch?v=a8fHgx9mE5U). Check out [my GitHub page](https://github.com/nikku).
 
 <br/>
 
