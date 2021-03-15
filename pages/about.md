@@ -19,13 +19,13 @@ In a nutshell:
 
 *   I spent a foreign semester at the [BTH](bth.se) in [Karlskrona, Sweden](http://maps.google.se/maps?f=q&source=s_q&hl=en&geocode=&q=karlskrona&sll=61.606396,21.225586&sspn=28.283373,93.076172&ie=UTF8&hq=&hnear=Karlskrona,+Blekinge&t=h&z=9) and received my masters in IT Systems Engineering from the [Hasso-Plattner-Institute](http://www.hpi.uni-potsdam.de), University of Potsdam in Potsdam, Germany.
 
-*   I wrote [my master thesis](http://tech.lefedt.de/2012/9/master-thesis-finished) on reversible debugging (some sort of [back in time debugging](http://scg.unibe.ch/archive/papers/Lien08bBackInTimeDebugging.pdf)). It will make you never again regret missing a breakpoint. If you use Squeak/Smalltalk.
+*   I wrote [my master thesis]({{ relative('blog/posts/2012/master-thesis-finished/') }}) on reversible debugging (some sort of [back in time debugging](http://scg.unibe.ch/archive/papers/Lien08bBackInTimeDebugging.pdf)). It will make you never again regret missing a breakpoint. If you use Squeak/Smalltalk.
 
 *   I've built up the [bpmn.io](https://bpmn.io/) project, providing best-in-class, extensible tooling for [viewing and editing BPMN](https://github.com/bpmn-io/bpmn-js) and related standards.
 
 *   I work at [Camunda](http://www.camunda.com/), a company that helps process centric business to scale through [BPM](https://en.wikipedia.org/wiki/Business_process_management).
 
-*   Most of the things I program are [open source](https://www.youtube.com/watch?v=a8fHgx9mE5U) and can be found on [GitHub](https://github.com/Nikku).
+*   Most of the things I program are [open source](https://www.youtube.com/watch?v=a8fHgx9mE5U) and can be found on [GitHub](https://github.com/nikku).
 
 <br/>
 
