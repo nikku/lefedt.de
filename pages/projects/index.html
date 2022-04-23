@@ -9,17 +9,19 @@ layout: default
   <div class="container">
     <h1>{{ title }}</h1>
 
-    <p style="margin-bottom: 30px">
-      A incomplete list of things I work (and worked) on.
+    <p>
+      An (incomplete) list of things I worked on:
     </p>
 
-    <div class="items" style="margin-left: 20px">
+    <div class="prj-projects">
       {% for item in items %}
-        {{ render(item) }}
+        <div class="prj-project">
+          {{ render(item) }}
+        </div>
       {% endfor %}
     </div>
 
-    <p style="margin-top: 50px">
+    <p>
       Check out more projects <a href="https://github.com/nikku">on GitHub</a>.
     </p>
   </div>
