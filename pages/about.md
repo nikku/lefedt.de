@@ -29,8 +29,6 @@ layout: default
 
 *   I work at [Camunda](http://www.camunda.com/), a company that helps process centric business to scale through [BPM](https://en.wikipedia.org/wiki/Business_process_management).
 
-*   Most of the things I do are [open source](https://www.youtube.com/watch?v=a8fHgx9mE5U). Check out [my GitHub page](https://github.com/nikku).
-
 <br/>
 
-Check out <a href="{{ relative('projects') }}">some of my projects</a>.
+Most of the things I do are [open source](https://www.youtube.com/watch?v=a8fHgx9mE5U). Check out [my GitHub page](https://github.com/nikku) or <a href="{{ relative('projects') }}">some of my projects</a>.
