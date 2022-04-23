@@ -7,15 +7,19 @@ layout: default
 
 <img class="img-bordered img-responsive" src="{{ assets }}/img/me.jpg" style="float:right; margin: 0 0 30px 30px" />
 
-In a nutshell:
+##### In a nutshell:
 
 *   I'm a software engineer located in <a href="https://www.google.de/maps/place/Berlin">Berlin, Germany</a>.
 
-*   I also build teams and create structures that empower and let work flow.
+*   I'm a solution architect and work with diverse teams to build things that work end-to-end, fit for purpose.
 
-*   I have experience in various fields of software engineering including but not limited to web programming using Java, JavaEE, Groovy, Ruby on Rails, Play, JavaScript, CSS, HTML, NodeJS and friends.
+*   I'm a team builder and create structures that empower and let work flow.
 
-*   Apart from web-development my main fields of interest are software architectures, rapid software development, developer and user experience, and software quality. Sometimes I like big data and the cloud, too.
+*   I worked with loads of programming languages in the past including but not limited to Java, JavaScript, SmallTalk, Prolog, Groovy, Ruby on Rails, CSS, HTML, NodeJS, and friends.
+
+*   Apart from software development my additional fields of interest are software architectures, developer and user experience, software quality, and delivery. 
+
+##### A little bit of history:
 
 *   I spent a foreign semester at the [BTH](bth.se) in [Karlskrona, Sweden](http://maps.google.se/maps?f=q&source=s_q&hl=en&geocode=&q=karlskrona&sll=61.606396,21.225586&sspn=28.283373,93.076172&ie=UTF8&hq=&hnear=Karlskrona,+Blekinge&t=h&z=9) and received my masters in IT Systems Engineering from the [Hasso-Plattner-Institute](http://www.hpi.uni-potsdam.de), University of Potsdam in Potsdam, Germany.
 
