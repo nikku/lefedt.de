@@ -2,7 +2,7 @@
 
 title: ngDefine
 technologies: [ AngularJS, RequireJS ]
-status: obsolete
+status: inactive
 
 created: 2013
 

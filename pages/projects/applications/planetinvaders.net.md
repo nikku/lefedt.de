@@ -2,7 +2,7 @@
 
 title: planetinvaders.net
 technologies: [ "Java" ]
-status: "discontinued"
+status: "inactive"
 
 created: 2008
 

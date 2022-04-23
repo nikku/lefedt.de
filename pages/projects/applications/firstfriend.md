@@ -2,7 +2,7 @@
 
 title: FirstFriend
 technologies: [ "Java", "Hibernate", "Spring", "Artificial Intelligence" ]
-status: "discontinued"
+status: "inactive"
 
 created: 2009
 
