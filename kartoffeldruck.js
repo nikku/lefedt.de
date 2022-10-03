@@ -4,7 +4,10 @@ var byPublished = function(a, b) {
   return a.published < b.published ? 1 : (a.published === b.published ? 0 : -1);
 };
 
-module.exports = function(druck) {
+/**
+ * @param { import('kartoffeldruck').Kartoffeldruck } druck
+ */
+module.exports = async function(druck) {
 
   druck.init({
     locals: {
@@ -24,8 +27,8 @@ module.exports = function(druck) {
   nunjucks.addFilter('excerpt', require('./helpers/excerpt'));
 
 
-  var published = druck.files('blog/posts/*/*.md').sort(byPublished);
-  var unpublished = druck.files('blog/posts/*/_drafts/*.md').sort(byPublished);
+  var published = (await druck.files('blog/posts/*/*.md')).sort(byPublished);
+  var unpublished = (await druck.files('blog/posts/*/_drafts/*.md')).sort(byPublished);
 
   // extract tags
 
@@ -42,15 +45,20 @@ module.exports = function(druck) {
 
   // simple pages
 
-  druck.generate({
-    source: '{legal/,}*.md',
+  await druck.generate({
+    source: '*.md',
+    dest: ':name/index.html'
+  });
+
+  await druck.generate({
+    source: 'legal/*.md',
     dest: ':name/index.html'
   });
 
 
   // index page
 
-  druck.generate({
+  await druck.generate({
     source: 'index.html',
     dest: 'index.html'
   });
@@ -58,21 +66,21 @@ module.exports = function(druck) {
 
   // published posts
 
-  druck.generate({
+  await druck.generate({
     source: published,
     dest: 'blog/posts/:slug/index.html'
   });
 
   // unpublished posts
 
-  druck.generate({
+  await druck.generate({
     source: unpublished,
     dest: 'blog/posts/:slug/index.html'
   });
 
   // published list
 
-  druck.generate({
+  await druck.generate({
     source: 'blog/index.html',
     dest: 'blog/:page/index.html',
     locals: { items: published },
@@ -81,21 +89,21 @@ module.exports = function(druck) {
 
   // tag list
 
-  forEach(tagged, function(t) {
+  for (const [ _, t ] of Object.entries(tagged)) {
     druck.generate({
       source: 'blog/_tagged.html',
       dest: 'blog/_tagged/:tag/:page/index.html',
       locals: t,
       paginate: 5
     });
-  });
+  }
 
 
-  var projects = druck.files('projects/*/*').sort(function(a, b) {
+  var projects = (await druck.files('projects/*/*')).sort(function(a, b) {
     return a.created < b.created ? 1 : (a.created === b.created ? 0 : -1);
   });
 
-  druck.generate({
+  await druck.generate({
     source: 'projects/index.html',
     dest: ':name.html',
     locals: { items: projects }
