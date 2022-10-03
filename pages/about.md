@@ -11,13 +11,17 @@ layout: default
 
 *   I'm a software engineer located in <a href="https://www.google.de/maps/place/Berlin">Berlin, Germany</a>.
 
-*   I'm a solution architect and work with diverse teams to build things that work end-to-end, fit for purpose.
+*   I'm an architect and work with diverse teams to build things that work end-to-end, fit for purpose.
 
 *   I'm a team builder and create structures that empower and let work flow.
 
-*   I worked with loads of programming languages in the past including but not limited to Java, JavaScript, SmallTalk, Prolog, Groovy, Ruby on Rails, CSS, HTML, NodeJS, and friends.
+*   I believe you can build great products only with your users in mind. I also know you have to say no, sometimes.
 
-*   Apart from software development my additional fields of interest are software architectures, developer and user experience, software quality, and delivery. 
+*   I remain to be a developer at heart and have worked with loads of programming languages in the past including but not limited to Java, JavaScript, SmallTalk, Prolog, Groovy, Ruby on Rails, CSS, HTML, NodeJS, and friends.
+
+*   I like to lead and inspire through communication _and_ action; checkout some of my [recent talks](https://github.com/nikku/talks#readme) and [tools I've created](https://lefedt.de/projects/) to suplement them.
+
+<br/>
 
 ##### A little bit of history:
 
