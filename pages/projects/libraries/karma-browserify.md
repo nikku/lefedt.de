@@ -9,4 +9,4 @@ created: 2014
 ---
 
 
-__[karma-browserify](https://github.com/nikku/karma-bro)__ - A fast [Browserify](http://browserify.org) integration for [Karma](http://karma-runner.github.io) that handles large projects with ease
+__[karma-browserify](https://github.com/nikku/karma-browserify)__ - A fast [Browserify](http://browserify.org) integration for [Karma](http://karma-runner.github.io) that handles large projects with ease
