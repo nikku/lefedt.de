@@ -11,11 +11,11 @@ layout: default
 
 *   I'm a software engineer located in <a href="https://www.google.de/maps/place/Berlin">Berlin, Germany</a>.
 
-*   I'm an architect and work with diverse teams to build things that work end-to-end, fit for purpose.
+*   I'm an architect and build things that work end-to-end, fit for purpose.
 
 *   I'm a team builder and create structures that empower and let work flow.
 
-*   I believe you can build great products only with your users in mind. I also know you have to say no, sometimes.
+*   I believe you can build great products only with your users in mind. I also know you have to say no a lot.
 
 *   I remain to be a developer at heart and have worked with loads of programming languages in the past including but not limited to Java, JavaScript, SmallTalk, Prolog, Groovy, Ruby on Rails, CSS, HTML, NodeJS, and friends.
 
@@ -31,7 +31,7 @@ layout: default
 
 *   I've built up the [bpmn.io](https://bpmn.io/) project, providing best-in-class, extensible tooling for [viewing and editing BPMN](https://github.com/bpmn-io/bpmn-js) and related standards.
 
-*   I work at [Camunda](http://www.camunda.com/), a company that helps process centric business to scale through [BPM](https://en.wikipedia.org/wiki/Business_process_management).
+*   At the moment I work as a principal software engineer at [Camunda](http://www.camunda.com/), a company that helps process centric business to scale through [BPM](https://en.wikipedia.org/wiki/Business_process_management).
 
 <br/>
 
