@@ -10,11 +10,10 @@
 
     <title>{% if title %}{{title}} · {% endif %}{{ site.title }}</title>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Donegal+One" type="text/css">
+    <link rel="stylesheet" href="{{ assets }}/css/blog.css" type="text/css">
 
     <link rel="stylesheet" href="{{ assets }}/vendor/highlight.css" type="text/css">
 
-    <link rel="stylesheet" href="{{ assets }}/css/blog.css" type="text/css">
     <link rel="icon" href="{{ assets }}/img/favicon.png">
 
     {% block head %}{% endblock %}
