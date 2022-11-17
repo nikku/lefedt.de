@@ -5,7 +5,7 @@ layout: default
 
 ---
 
-<img class="img-bordered img-responsive" src="{{ assets }}/img/me.jpg" style="float:right; margin: 0 0 30px 30px" />
+<img class="img-bordered img-responsive" src="{{ assets }}/img/me.jpg" style="float: right; margin: -5px 0 30px 30px" />
 
 ##### In a nutshell:
 
