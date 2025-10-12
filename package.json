@@ -1,7 +1,7 @@
 {
   "name": "lefedt.de",
   "version": "0.0.0",
-  "description": "Sources of lefedt.de",
+  "description": "sources of lefedt.de",
   "scripts": {
     "all": "npm run build",
     "dev": "grunt serve",
