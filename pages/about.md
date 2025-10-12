@@ -1,6 +1,7 @@
 ---
 
 title: About me
+description: Some more details about Nico Rehwaldt.
 layout: default
 
 ---

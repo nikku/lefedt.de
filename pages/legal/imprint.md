@@ -1,6 +1,7 @@
 ---
 
 title: Impressum und ViSdP
+description: The necessary legal stuff.
 layout: default
 
 ---

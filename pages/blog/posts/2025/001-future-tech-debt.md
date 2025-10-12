@@ -2,6 +2,7 @@
 
 title: 'Future tech debt'
 slug: 2025/future-tech-debt
+description: A rant on fancy new stuff, and why it is likely your future tech debt.
 layout: post
 
 tags: 

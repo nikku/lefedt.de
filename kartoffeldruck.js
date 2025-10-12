@@ -13,7 +13,8 @@ module.exports = async function(druck) {
     locals: {
       site: {
         title: 'lefedt.de',
-        author: 'Nico Rehwaldt'
+        author: 'Nico Rehwaldt',
+        description: 'The website of Nico Rehwaldt. Learn about me and what I\'m doing'
       }
     }
   });
