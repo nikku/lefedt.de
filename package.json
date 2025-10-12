@@ -1,7 +1,7 @@
 {
   "name": "lefedt.de",
   "version": "0.0.0",
-  "description": "sources of lefedt.de",
+  "description": "Sources of lefedt.de",
   "scripts": {
     "all": "npm run build",
     "dev": "grunt serve",
@@ -12,7 +12,7 @@
     "url": "https://github.com/nikku/lefedt.de"
   },
   "author": "Nico Rehwaldt<git_nikku@nixis.de>",
-  "license": "MIT",
+  "license": "See LICENSE in LICENSE",
   "homepage": "http://lefedt.de",
   "private": true,
   "devDependencies": {
