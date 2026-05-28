@@ -28,8 +28,8 @@ published: 2026-05-24
 
 **Deciding what code to build** is not for free.
 
-**Building code in the right way** ("architecture") is not for free.
+**Building the right code** ("architecture") is not for free.
 
-**Any investment to [make future code more free](https://nikku.github.io/talks/2025-no-refactoring-issues/)** is not for free.
+**Investing to [make future code more free](https://nikku.github.io/talks/2025-no-refactoring-issues/)** is not for free.
 
 But **code** is for free?
